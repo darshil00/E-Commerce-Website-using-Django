@@ -1,0 +1,24 @@
+{% load static %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+{% load django_tables2 %}
+
+<table class="table table-bordered table-dark pagination display" id="tableID">
+    {% if query|length >= 2 %}
+    {% render_table table %}
+    {% else %}
+    {% render_table query %}
+    {% endif %}
+</table>
+
+<form method="post" id="num" action="{% url 'viewtable' %}">
+    {% csrf_token %}
+    {{form}}
+    <hr>
+    <input class="w-100 btn btn-lg btn-primary" type="submit" value="Display">
+</form>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <a href="{% url 'display' %}" class="w-100 btn btn-lg btn-primary">GO BACK</a>
+    </div>
+</footer>

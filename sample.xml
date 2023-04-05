@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Users>
+    <user1>
+        <U_name>darshil</U_name>
+        <U_dob>2002-10-20</U_dob>
+        <U_username>darshil02</U_username>
+        <U_password>darshil020</U_password>
+    </user1>
+    <user2>
+        <U_name>xml_newuser</U_name>
+        <U_dob>2112-10-20</U_dob>
+        <U_username>xml_new_123</U_username>
+        <U_password>xml123</U_password>
+    </user2>
+    <user3>
+        <U_name>trial</U_name>
+        <U_dob>2000-12-02</U_dob>
+        <U_username>xml_trial_123</U_username>
+        <U_password>xmltrial@123</U_password>
+    </user3>
+    <user4>
+        <U_name>trial</U_name>
+        <U_dob>2002-10-25</U_dob>
+        <U_username>trialuser</U_username>
+        <U_password>trial</U_password>
+    </user4>
+</Users>

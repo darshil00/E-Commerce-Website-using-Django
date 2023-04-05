@@ -1,0 +1,132 @@
+<!doctype html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Checkout</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+        
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+        
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+        hr {
+            clear: both;
+            visibility: hidden;
+        }
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+        
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .container {
+            max-width: 960px;
+        }
+    </style>
+
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h2>CHECKOUT</h2>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-md-5 col-lg-4 order-md-last">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-primary">YOUR CART</span>
+                            <span class="badge bg-primary rounded-pill">{{items}}</span>
+                        </h4>
+                        <ul class="list-group mb-3">
+                            {% for NAME,COST,IDS,STATS in zipped_data %}
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>{{NAME}}</span>
+                                <span class="text-muted">{{COST}}</span>
+                                <button type="submit" name="remove_button" value={{IDS}}>
+                                <img src="{% static 'remove.png' %}" width="30px">
+                                </button>
+                            </li>
+                            {%endfor%}
+                        </ul>
+                        <hr>
+                        <h4>Total Cost: Rs. {{total}}</h4>
+                    </form>
+                </div>
+
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Your Details</h4>
+                    <form class="needs-validation" action="{% url 'checkout' %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            {% for field in orderform %}
+                            <div class="col-sm-12">
+                                {{field.label_tag}} {{field}}
+                                <hr> {% endfor %}
+                            </div>
+
+                        <hr class="my-4">
+                        <input type="submit" value="PLACE ORDER" class="w-100 btn btn-lg btn-primary">
+                    </form>
+                </div>
+                <hr>
+                <a href="{% url 'display' %}">
+                    <span class="btn btn-lg btn-primary">GO BACK</span>
+                </a>
+            </div>
+            <hr>
+            <hr>
+        </main>
+
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'index.umd.js' %}"></script>
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+</body>
+
+</html>
